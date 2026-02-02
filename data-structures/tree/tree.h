@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../data-structures/headers.hpp"
+#include "headers.hpp"
 
 template <typename T>
 class Tree

@@ -21,5 +21,5 @@ fi
 # Run
 ./bin/"$p"
 
-# Make an executable: chmod +x run_cpp.sh
-# Run: ./run_cpp.sh your_cpp_filename
+# Make an executable: chmod +x run.sh
+# Run: ./run.sh your_cpp_filename
