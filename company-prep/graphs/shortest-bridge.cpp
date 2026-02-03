@@ -26,6 +26,7 @@ void dfs(vec2i& grid, int r, int c, vec2i& visited, queue<pair<int,int>>& q) {
     }
 }
 
+// DFS + multi-source BFS
 int shortestBridge(vector<vector<int>>& grid) {
  int n = grid.size();
     int m = grid[0].size();

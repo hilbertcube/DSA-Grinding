@@ -31,7 +31,7 @@ bool isValid(vec2c& grid, int r, int c) {
 }
 
 int minimumSteps(vec2c& grid, int r, int c) {
-    if(grid[r][c] == 'X') return -1;
+    // if(grid[r][c] == 'X') return -1;
     if (grid[r][c] == 'C') return 0;
 
     int n = grid.size();
