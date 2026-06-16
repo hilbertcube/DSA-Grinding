@@ -1,6 +1,21 @@
 bin/
-*.exe
 build/
+
+# Compiled artifacts
+*.o
+*.obj
+*.out
+*.exe
+*.a
+*.so
+*.dylib
+
+# Editor and OS noise
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Local notes and generated workspace files
 .Links.md
-*.txt
 cpp_ds.md

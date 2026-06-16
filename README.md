@@ -1,24 +1,51 @@
-# DSA Crunching
+# DSA Grinding
 
-Personal repo for grinding LeetCode / NeetCode problems in C++.
+C++ practice repo for data structures, algorithms, and interview-style problems.
 
-## Running a problem
+## Layout
+
+- `problems/`: categorized LeetCode-style solutions
+- `company-prep/`: one-off interview prep problems
+- `data-structures/`: custom implementations and tests
+- `include/headers.hpp`: shared STL includes used by problem files
+- `third_party/googletest/`: vendored GoogleTest
+- `x.sh`: compile-and-run helper for single problem files
+
+## Prerequisites
+
+- `g++` with C++17 support
+- `bash`
+
+## Run a Problem
+
+The runner compiles a single file from `problems/` and executes the result.
 
 ```bash
-./run.sh 1_arrays-and-hashing/01_contains-duplicate
+./x.sh 1_arrays-and-hashing/01_contains-duplicate
 ```
 
-## Running tests
-
-Tests live at the bottom of each problem file under `#ifdef TESTING`.
+These forms also work:
 
 ```bash
-./run.sh 1_arrays-and-hashing/01_contains-duplicate --test
+./x.sh problems/1_arrays-and-hashing/01_contains-duplicate
+./x.sh problems/1_arrays-and-hashing/01_contains-duplicate.cpp
 ```
 
-`gtest-all.o` is built once into `bin/` on first `--test` run and reused after that.
+Compiled binaries are written to `bin/`.
 
-## Adding tests to a new problem file
+## Run Tests
+
+Most problem tests live at the bottom of each file under `#ifdef TESTING`.
+
+```bash
+./x.sh 1_arrays-and-hashing/01_contains-duplicate --test
+```
+
+On the first test run, the repo builds `bin/gtest-all.o` from vendored GoogleTest and reuses it on later runs.
+
+## Test File Pattern
+
+Use this structure inside a problem file:
 
 ```cpp
 #ifdef TESTING
@@ -42,24 +69,10 @@ int main() {
 #endif
 ```
 
-## Project structure
+## Formatting
 
-```text
-.
-├── include/
-│   └── headers.hpp       # common STL includes used across all problems
-├── neetcode-problems/
-│   └── 1_arrays-and-hashing/
-│       ├── 01_contains-duplicate.cpp
-│       └── ...
-├── third_party/
-│   └── googletest/       # cloned at depth 1, do not edit
-└── run.sh
-```
-
-## Format
-
-```
+```bash
 find ./problems -name "*.cpp" -o -name "*.hpp" -o -name "*.h" | xargs clang-format -i --style=file:./.clang-format
 find ./include -name "*.cpp" -o -name "*.hpp" -o -name "*.h" | xargs clang-format -i --style=file:./.clang-format
+find ./data-structures -name "*.cpp" -o -name "*.hpp" -o -name "*.h" | xargs clang-format -i --style=file:./.clang-format
 ```
