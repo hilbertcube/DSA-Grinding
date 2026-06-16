@@ -1,7 +1,15 @@
 #include "headers.hpp"
 
-int main(int argc, char *argv[])
-{
-
-    return 0;
+void implementation(vector<int> &const input) {
 }
+
+#ifdef TESTING
+#include <gtest/gtest.h>
+
+#else
+
+int main() {
+  return 0;
+}
+
+#endif

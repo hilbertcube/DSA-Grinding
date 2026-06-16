@@ -4,6 +4,7 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
+                "${workspaceFolder}/third_party/googletest/googletest/include",
                 "/usr/lib/x86_64-linux-gnu/openmpi/include",
                 "/usr/lib/x86_64-linux-gnu/openmpi/include/openmpi",
                 "/media/work/DSA-Grinding/include"
