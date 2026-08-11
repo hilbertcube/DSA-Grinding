@@ -110,5 +110,4 @@ int calculate2(const string &s) {
 }
 
 // Which implementation the tests run.
-constexpr int IMPL = 1;
-constexpr auto calculate = selectImpl<IMPL>(calculate1, calculate2);
+SELECT_IMPL(1, calculate, calculate1, calculate2);

@@ -15,8 +15,19 @@ Input: root = []
 Output: 0
 */
 
-int maxDepth(TreeNode *root) {
+int maxDepth1(TreeNode *root) {
+  if(!root) return 0;
+  return 0;
 }
+
+int maxDepth2(TreeNode *root) {
+  if(!root) return 0;
+  return 0;
+}
+
+
+// Which implementation the tests run.
+SELECT_IMPL(1, maxDepth, maxDepth1, maxDepth2);
 
 TEST(MaximumDepth, CountsLevelsOfBalancedTree) {
   TreeNode *root = buildTreeFromLevelOrder({3, 9, 20, null, null, 15, 7});

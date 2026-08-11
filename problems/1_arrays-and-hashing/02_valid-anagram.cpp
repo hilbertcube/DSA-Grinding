@@ -32,8 +32,7 @@ bool isAnagram2(string s, string t) {
 }
 
 // Which implementation the tests run.
-constexpr int IMPL = 1;
-constexpr auto isAnagram = selectImpl<IMPL>(isAnagram1, isAnagram2);
+SELECT_IMPL(1, isAnagram, isAnagram1, isAnagram2);
 
 TEST(ValidAnagram, IsAnagram) {
   EXPECT_TRUE(isAnagram("racecar", "carrace"));

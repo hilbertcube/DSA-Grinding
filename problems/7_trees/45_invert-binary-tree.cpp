@@ -15,6 +15,7 @@ Input: root = [2,1,3]
 Output: [2,3,1]
 */
 
+// Recursive DFS
 TreeNode *invertTree1(TreeNode *root) {
   if (!root)
     return nullptr;
@@ -24,6 +25,7 @@ TreeNode *invertTree1(TreeNode *root) {
   return root;
 }
 
+// BFS
 TreeNode *invertTree2(TreeNode *root) {
   if (!root)
     return nullptr;
@@ -41,6 +43,7 @@ TreeNode *invertTree2(TreeNode *root) {
   return root;
 }
 
+// Iterative DFS
 TreeNode *invertTree3(TreeNode *root) {
   if (!root)
     return nullptr;
@@ -59,9 +62,7 @@ TreeNode *invertTree3(TreeNode *root) {
 }
 
 // Which implementation the tests run.
-constexpr int IMPL = 1;
-constexpr auto invertTree 
-= selectImpl<IMPL>(invertTree1, invertTree2, invertTree3);
+SELECT_IMPL(2, invertTree, invertTree1, invertTree2, invertTree3);
 
 TEST(InvertBinaryTree, MirrorsPerfectTree) {
   TreeNode *root = buildTreeFromLevelOrder({4, 2, 7, 1, 3, 6, 9});

@@ -18,8 +18,7 @@ bool hasDuplicate2(vector<int> &num) {
 }
 
 // Which implementation the tests run.
-constexpr int IMPL = 1;
-constexpr auto hasDuplicate = selectImpl<IMPL>(hasDuplicate1, hasDuplicate2);
+SELECT_IMPL(1, hasDuplicate, hasDuplicate1, hasDuplicate2);
 
 TEST(ContainsDuplicate, HasDuplicate) {
   vector<int> nums = {1, 2, 3, 1};

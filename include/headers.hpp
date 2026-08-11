@@ -37,19 +37,74 @@
 using namespace std;
 
 // ——— Solution variant selection ———
-// A problem often carries several implementations. List them and pick the one
-// the tests run, 1-indexed to match the naming:
-//
-//   constexpr int IMPL = 1;
-//   constexpr auto invertTree = selectImpl<IMPL>(invertTree1, invertTree2, invertTree3);
-//
-// Every variant is still compiled whichever one is selected, so none of them
-// rot, and an out-of-range IMPL is a compile error rather than a bad read.
+
+/**
+ * @brief Returns the @p N th function from @p fns, 1-indexed.
+ *
+ * Called in a constant expression, so the tuple is built and indexed entirely
+ * at compile time and nothing survives into the generated code. Prefer the
+ * SELECT_IMPL macro over calling this directly.
+ *
+ * @tparam N    1-based index of the function to return.
+ * @tparam Fns  Function pointer types, deduced from @p fns.
+ * @param  fns  The candidate functions, in index order.
+ * @return The selected function pointer.
+ */
 template <int N, typename... Fns>
 constexpr auto selectImpl(Fns... fns) {
   static_assert(N >= 1 && N <= static_cast<int>(sizeof...(Fns)), "IMPL is out of range for this problem's implementation list");
   return std::get<N - 1>(std::make_tuple(fns...));
 }
+
+/**
+ * @brief Prints which implementation is active, once, at static-init time.
+ *
+ * Constructed by SELECT_IMPL. This cannot live inside selectImpl(): that call
+ * is a constant expression, and constant evaluation cannot do I/O. Announcing
+ * from a separate runtime object keeps the selection itself compile-time.
+ */
+struct ImplAnnouncer {
+  explicit ImplAnnouncer(int n) 
+  { 
+    cout << "\033[32m==== TESTING IMPLEMENTATION " 
+        << n << " ====\033[0m\n"; 
+  }
+};
+
+/**
+ * @def SELECT_IMPL
+ * @brief Binds @p name to one of several interchangeable implementations.
+ *
+ * A problem often carries more than one solution. Name them @c solve1,
+ * @c solve2, ... and let this pick the live one, so the tests can call a single
+ * stable name and switching is a one-digit edit.
+ *
+ * Expands to two declarations: a @c constexpr alias resolved at compile time,
+ * and a static object that announces the choice at startup. The unused variants
+ * cost nothing at runtime, but are still compiled, which stops them rotting.
+ *
+ * @param n     1-based index of the variant to run. Must be a constant
+ *              expression; out of range fails a @c static_assert in
+ *              selectImpl() rather than reading past the list.
+ * @param name  Identifier the tests call.
+ * @param ...   The implementations, in index order.
+ *
+ * @note Also declares @c name##_announcer in the enclosing scope, so avoid
+ *       that identifier yourself.
+ * @note The announcement is a separate runtime object by necessity: the
+ *       selection is a constant expression, and constant evaluation cannot
+ *       perform I/O.
+ *
+ * @code
+ * constexpr int IMPL = 1;
+ * SELECT_IMPL(IMPL, invertTree, invertTree1, invertTree2, invertTree3);
+ * @endcode
+ *
+ * @see selectImpl(), ImplAnnouncer
+ */
+#define SELECT_IMPL(n, name, ...)                   \
+  constexpr auto name = selectImpl<n>(__VA_ARGS__); \
+  static const ImplAnnouncer name##_announcer { n }
 
 // ——— Sequence containers ———
 template <typename T>

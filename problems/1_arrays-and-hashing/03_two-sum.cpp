@@ -26,8 +26,7 @@ vector<int> twoSum2(const vector<int> &nums, int target) {
 }
 
 // Which implementation the tests run.
-constexpr int IMPL = 1;
-constexpr auto twoSum = selectImpl<IMPL>(twoSum1, twoSum2);
+SELECT_IMPL(1, twoSum, twoSum1, twoSum2);
 
 TEST(TwoSum, BasicCase) {
   vector<int> nums = {2, 7, 11, 15};

@@ -50,7 +50,9 @@ log="$(mktemp)"
 trap 'rm -f "$log"' EXIT
 
 set -o pipefail
-"$output" 2>&1 | tee "$log"
+# Piping through tee hides the TTY from gtest, which would silently disable its
+# green/red output. Force it on, but let an existing GTEST_COLOR win.
+GTEST_COLOR="${GTEST_COLOR:-yes}" "$output" 2>&1 | tee "$log"
 status=$?
 
 # A file with no tests still links and exits 0, so call that out explicitly.

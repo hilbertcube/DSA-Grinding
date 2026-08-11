@@ -121,8 +121,7 @@ int minimumSteps2(vec2c &grid, int r, int c) {
 }
 
 // Which implementation the tests run.
-constexpr int IMPL = 1;
-constexpr auto minimumSteps = selectImpl<IMPL>(minimumSteps1, minimumSteps2);
+SELECT_IMPL(1, minimumSteps, minimumSteps1, minimumSteps2);
 
 void expectSteps(vec2c grid, int r, int c, int expected) {
   EXPECT_EQ(minimumSteps(grid, r, c), expected);
