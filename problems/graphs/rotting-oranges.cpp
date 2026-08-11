@@ -74,8 +74,3 @@ int orangesRotting(vector<vector<int>> &grid) {
   }
   return (fresh == 0 ? minutes : -1);
 }
-
-int main(int argc, char *argv[]) {
-
-  return 0;
-}

@@ -19,6 +19,3 @@ vector<int> sieveOfEratosthenes(int n) {
   }
   return {};
 }
-
-int main() {
-}

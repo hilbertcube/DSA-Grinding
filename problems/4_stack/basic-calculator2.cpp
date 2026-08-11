@@ -108,8 +108,3 @@ int calculate2(const string &s) {
 
   return result + last;
 }
-
-int main() {
-
-  return 0;
-}

@@ -27,8 +27,3 @@ void rotate(vector<vector<int>> &matrix) {
   transpose(matrix);
   flip_horizontally(matrix);
 }
-
-int main(int argc, char *argv[]) {
-
-  return 0;
-}

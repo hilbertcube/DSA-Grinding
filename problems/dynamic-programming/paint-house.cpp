@@ -32,8 +32,3 @@ int min_cost(vector<vector<int>> &costs) {
     dp[i][1] = min(dp[i - 1][0], dp[i - 1][1]);
   }
 }
-
-int main(int argc, char *argv[]) {
-
-  return 0;
-}

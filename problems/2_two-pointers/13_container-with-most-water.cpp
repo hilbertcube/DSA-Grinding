@@ -27,8 +27,3 @@ int maxArea(vector<int> &heights) {
   }
   return max_water;
 }
-
-int main(int argc, char *argv[]) {
-
-  return 0;
-}

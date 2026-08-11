@@ -56,8 +56,3 @@ vector<int> productExceptSelf(vector<int> &nums) {
   }
   return output;
 }
-
-int main(int argc, char *argv[]) {
-
-  return 0;
-}

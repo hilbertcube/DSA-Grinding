@@ -19,8 +19,3 @@ int longestConsecutive(vector<int> &nums) {
   }
   return max_len;
 }
-
-int main(int argc, char *argv[]) {
-
-  return 0;
-}

@@ -21,8 +21,3 @@ bool isHappy(int n) {
   }
   return true;
 }
-
-int main() {
-
-  return 0;
-}

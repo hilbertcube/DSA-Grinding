@@ -1,4 +1,5 @@
 #include "headers.hpp"
+#include <gtest/gtest.h>
 
 bool isAnagram(string s, string t) {
   if (s.size() != t.size())
@@ -30,9 +31,6 @@ bool isAnagram2(string s, string t) {
   return countS == countT;
 }
 
-#ifdef TESTING
-#include <gtest/gtest.h>
-
 TEST(ValidAnagram, IsAnagram) {
   EXPECT_TRUE(isAnagram("racecar", "carrace"));
   EXPECT_TRUE(isAnagram("anagram", "nagaram"));
@@ -55,16 +53,3 @@ TEST(ValidAnagram, SingleChar) {
   EXPECT_TRUE(isAnagram("a", "a"));
   EXPECT_FALSE(isAnagram("a", "b"));
 }
-
-int main(int argc, char **argv) {
-  testing::InitGoogleTest(&argc, argv);
-  return RUN_ALL_TESTS();
-}
-
-#else
-
-int main() {
-  return 0;
-}
-
-#endif

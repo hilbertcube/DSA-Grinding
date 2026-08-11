@@ -25,8 +25,3 @@ vector<vector<int>> merge(vector<vector<int>> &intervals) {
   }
   return output;
 }
-
-int main(int argc, char *argv[]) {
-
-  return 0;
-}

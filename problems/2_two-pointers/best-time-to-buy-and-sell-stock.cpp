@@ -15,8 +15,3 @@ int maxProfit(vector<int> &prices) {
   }
   return max_so_far;
 }
-
-int main(int argc, char *argv[]) {
-
-  return 0;
-}

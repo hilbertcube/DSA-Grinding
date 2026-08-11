@@ -1,4 +1,5 @@
 #include "headers.hpp"
+#include <gtest/gtest.h>
 
 /*
 Example 1:
@@ -44,9 +45,6 @@ ListNode *mergeTwoLists(ListNode *list1, ListNode *list2) {
   tail->next = list1 ? list1 : list2; // attach remainder once, after the loop
   return dummy.next;
 }
-
-#ifdef TESTING
-#include <gtest/gtest.h>
 
 ListNode *buildList(const vector<int> &values) {
   ListNode dummy;
@@ -109,16 +107,3 @@ TEST(MergeTwoSortedLists, PreservesDuplicatesAcrossLists) {
   EXPECT_EQ(listToVector(merged), (vector<int>{1, 1, 1, 2, 3, 3}));
   deleteList(merged);
 }
-
-int main(int argc, char **argv) {
-  testing::InitGoogleTest(&argc, argv);
-  return RUN_ALL_TESTS();
-}
-
-#else
-
-int main() {
-  return 0;
-}
-
-#endif

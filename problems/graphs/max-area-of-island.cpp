@@ -48,8 +48,3 @@ int maxAreaOfIsland(vec2i &grid) {
   }
   return max_area;
 }
-
-int main(int argc, char *argv[]) {
-
-  return 0;
-}

@@ -34,8 +34,3 @@ vector<string> letterCombinations(string digits) {
   }
   return output;
 }
-
-int main(int argc, char *argv[]) {
-
-  return 0;
-}

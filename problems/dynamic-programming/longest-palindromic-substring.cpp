@@ -23,8 +23,3 @@ string longestPalindrome(string s) {
 
   return s.substr(best_l, best_len);
 }
-
-int main() {
-
-  return 0;
-}

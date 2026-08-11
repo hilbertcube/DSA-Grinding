@@ -1,4 +1,5 @@
-#include "../../include/headers.hpp"
+#include "headers.hpp"
+#include <gtest/gtest.h>
 
 /*
 You are given a 2D grid representing a parking lot.
@@ -119,13 +120,67 @@ int minimumSteps2(vec2c &grid, int r, int c) {
   return -1;
 }
 
-int main() {
-  vector<std::vector<char>> grid = {
+// Both implementations must agree, so every case runs through each.
+void expectSteps(vec2c grid, int r, int c, int expected) {
+  EXPECT_EQ(minimumSteps(grid, r, c), expected);
+  EXPECT_EQ(minimumSteps2(grid, r, c), expected);
+}
+
+// The grid the old main() used to build, now actually asserted on. The nearest
+// station is the one at (0,4), reached via the open middle row.
+TEST(NearestChargingStation, NavigatesAroundObstacles) {
+  vec2c grid = {
     {'E', 'E', 'E', 'X', 'C'},
     {'X', 'X', 'E', 'X', 'E'},
     {'E', 'E', 'E', 'E', 'E'},
     {'E', 'X', 'X', 'X', 'E'},
     {'E', 'E', 'E', 'C', 'E'}};
 
-  return 0;
+  expectSteps(grid, 0, 0, 8);
+}
+
+TEST(NearestChargingStation, AlreadyOnAStation) {
+  vec2c grid = {{'C'}};
+
+  expectSteps(grid, 0, 0, 0);
+}
+
+TEST(NearestChargingStation, AdjacentStation) {
+  vec2c grid = {{'E', 'C'}};
+
+  expectSteps(grid, 0, 0, 1);
+}
+
+TEST(NearestChargingStation, WalledOffStationIsUnreachable) {
+  vec2c grid = {
+    {'E', 'X', 'C'},
+    {'X', 'X', 'X'},
+    {'E', 'E', 'E'}};
+
+  expectSteps(grid, 0, 0, -1);
+}
+
+TEST(NearestChargingStation, NoStationAtAll) {
+  vec2c grid = {
+    {'E', 'E'},
+    {'E', 'E'}};
+
+  expectSteps(grid, 0, 0, -1);
+}
+
+// Picks the closer of two stations rather than the first one seen.
+TEST(NearestChargingStation, ChoosesNearestOfSeveral) {
+  vec2c grid = {{'C', 'E', 'E', 'E', 'C'}};
+
+  expectSteps(grid, 0, 3, 1);
+}
+
+TEST(NearestChargingStation, StraightCorridor) {
+  vec2c grid = {
+    {'E'},
+    {'E'},
+    {'E'},
+    {'C'}};
+
+  expectSteps(grid, 0, 0, 3);
 }

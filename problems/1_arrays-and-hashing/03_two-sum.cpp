@@ -1,4 +1,5 @@
 #include "headers.hpp"
+#include <gtest/gtest.h>
 
 // brute force
 vector<int> twoSum1(const vector<int> &nums, int target) {
@@ -17,20 +18,16 @@ vector<int> twoSum2(const vector<int> &nums, int target) {
 
   for (int i{0}; i < nums.size(); ++i) {
     int need = target - nums[i];
-    if(seen.count(need)) 
+    if (seen.count(need))
       return {seen[need], i};
     seen[nums[i]] = i;
   }
   return {};
 }
 
-vector<int> twoSum(const vector<int> &nums, int target)
-{
+vector<int> twoSum(const vector<int> &nums, int target) {
   return twoSum1(nums, target);
 }
-
-#ifdef TESTING
-#include <gtest/gtest.h>
 
 TEST(TwoSum, BasicCase) {
   vector<int> nums = {2, 7, 11, 15};
@@ -51,16 +48,3 @@ TEST(TwoSum, AnswerAtEnd) {
   vector<int> nums = {3, 2, 4};
   EXPECT_EQ(twoSum(nums, 6), (vector<int>{1, 2}));
 }
-
-int main(int argc, char **argv) {
-  testing::InitGoogleTest(&argc, argv);
-  return RUN_ALL_TESTS();
-}
-
-#else
-
-int main() {
-  return 0;
-}
-
-#endif

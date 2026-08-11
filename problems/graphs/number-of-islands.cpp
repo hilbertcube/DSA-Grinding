@@ -1,4 +1,5 @@
-#include "include/headers.hpp"
+#include "headers.hpp"
+#include <gtest/gtest.h>
 
 /*
 Given an m x n 2D binary grid grid which represents a map of '1's (land) and '0's (water), return the number of islands.
@@ -36,30 +37,13 @@ grid[i][j] is '0' or '1'.
 using vec2_ch = vector<vector<char>>;
 using vec2_b = vector<vector<bool>>;
 
-// 8 directions
-void dfs_8(vec2_ch &grid, int r, int c, vec2_b &visited) {
-  visited[r][c] = true;
-
-  for (int dr = -1; dr <= 1; ++dr) {
-    for (int dc = -1; dc <= 1; ++dc) {
-      if (dr == 0 && dc == 0)
-        continue;
-
-      int nr = r + dr;
-      int nc = c + dc;
-      if (isSafe(grid, r, c) && !visited[dr][dc])
-        dfs(grid, r, c, visited);
-    }
-  }
-}
-
 bool isSafe(vec2_ch &grid, int r, int c) {
   int n = grid.size();    // num rows
   int m = grid[0].size(); // num cols
 
   bool within_bound = (r >= 0 && r < n && c >= 0 && c < m);
 
-  return (within_bound && grid[r][c] == 'L');
+  return (within_bound && grid[r][c] == '1');
 }
 
 void dfs(vec2_ch &grid, int r, int c, vec2_b &visited) {
@@ -98,16 +82,72 @@ int numIslands(vector<vector<char>> &grid) {
   return num_island;
 }
 
-int main() {
+TEST(NumberOfIslands, SingleLargeIsland) {
+  vec2_ch grid = {
+    {'1', '1', '1', '1', '0'},
+    {'1', '1', '0', '1', '0'},
+    {'1', '1', '0', '0', '0'},
+    {'0', '0', '0', '0', '0'}};
 
-  vector<vector<char>> grid = {
+  EXPECT_EQ(numIslands(grid), 1);
+}
+
+TEST(NumberOfIslands, ThreeSeparateIslands) {
+  vec2_ch grid = {
+    {'1', '1', '0', '0', '0'},
+    {'1', '1', '0', '0', '0'},
+    {'0', '0', '1', '0', '0'},
+    {'0', '0', '0', '1', '1'}};
+
+  EXPECT_EQ(numIslands(grid), 3);
+}
+
+// The grid the old main() used to print, kept as a real assertion.
+TEST(NumberOfIslands, ConnectsAroundCorners) {
+  vec2_ch grid = {
     {'0', '1', '1', '1', '0'},
     {'0', '1', '0', '1', '0'},
     {'1', '1', '0', '0', '0'},
     {'0', '0', '0', '0', '0'}};
 
-  // printing the number of islands
-  cout << numIslands(grid) << endl;
+  EXPECT_EQ(numIslands(grid), 1);
+}
 
-  return 0;
+TEST(NumberOfIslands, AllWater) {
+  vec2_ch grid = {
+    {'0', '0'},
+    {'0', '0'}};
+
+  EXPECT_EQ(numIslands(grid), 0);
+}
+
+TEST(NumberOfIslands, AllLand) {
+  vec2_ch grid = {
+    {'1', '1'},
+    {'1', '1'}};
+
+  EXPECT_EQ(numIslands(grid), 1);
+}
+
+TEST(NumberOfIslands, SingleCell) {
+  vec2_ch land = {{'1'}};
+  vec2_ch water = {{'0'}};
+
+  EXPECT_EQ(numIslands(land), 1);
+  EXPECT_EQ(numIslands(water), 0);
+}
+
+// Diagonal neighbors are not connected, so these count separately.
+TEST(NumberOfIslands, DiagonalCellsAreNotConnected) {
+  vec2_ch grid = {
+    {'1', '0'},
+    {'0', '1'}};
+
+  EXPECT_EQ(numIslands(grid), 2);
+}
+
+TEST(NumberOfIslands, SingleRowAlternating) {
+  vec2_ch grid = {{'1', '0', '1', '0', '1'}};
+
+  EXPECT_EQ(numIslands(grid), 3);
 }

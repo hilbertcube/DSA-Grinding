@@ -41,8 +41,3 @@ bool isValidSudoku(vector<vector<char>> &board) {
   }
   return true;
 }
-
-int main(int argc, char *argv[]) {
-
-  return 0;
-}

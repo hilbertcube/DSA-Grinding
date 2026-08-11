@@ -1,4 +1,5 @@
 #include "headers.hpp"
+#include <gtest/gtest.h>
 
 bool hasDuplicate(vector<int> &nums) {
   unordered_set<int> set;
@@ -10,8 +11,11 @@ bool hasDuplicate(vector<int> &nums) {
   return false;
 }
 
-#ifdef TESTING
-#include <gtest/gtest.h>
+bool hasDuplicate2(vector<int> &num) {
+  vector<int> freq;
+
+  return false;
+}
 
 TEST(ContainsDuplicate, HasDuplicate) {
   vector<int> nums = {1, 2, 3, 1};
@@ -37,16 +41,3 @@ TEST(ContainsDuplicate, AllSame) {
   vector<int> nums = {5, 5, 5, 5};
   EXPECT_TRUE(hasDuplicate(nums));
 }
-
-int main(int argc, char **argv) {
-  testing::InitGoogleTest(&argc, argv);
-  return RUN_ALL_TESTS();
-}
-
-#else
-
-int main() {
-  return 0;
-}
-
-#endif

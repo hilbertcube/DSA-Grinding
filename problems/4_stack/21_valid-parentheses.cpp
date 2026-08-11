@@ -29,8 +29,3 @@ bool isValid(string s) {
   }
   return st.empty();
 }
-
-int main(int argc, char *argv[]) {
-
-  return 0;
-}

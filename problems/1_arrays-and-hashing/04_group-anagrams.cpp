@@ -22,25 +22,18 @@ Input: strs = [""]
 Output: [[""]]
 */
 
-// implementation 1: 
+// implementation 1:
 vector<vector<string>> groupAnagrams(vector<string> &strs) {
   // {sorted string, list of corresponding strings}
-  unordered_map<string, vector<string>> res; 
+  unordered_map<string, vector<string>> res;
   vector<vector<int>> output;
 
-  for(auto& str : strs) {
+  for (auto &str : strs) {
     string sorted_str = str;
     sort(sorted_str.begin(), sorted_str.end());
     res[sorted_str].push_back(str);
   }
 
-  for(auto& list : output) {
-    
+  for (auto &list : output) {
   }
-
-}
-
-int main(int argc, char *argv[]) {
-
-  return 0;
 }
