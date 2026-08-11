@@ -15,14 +15,53 @@ Input: root = [2,1,3]
 Output: [2,3,1]
 */
 
-TreeNode *invertTree(TreeNode *root) {
+TreeNode *invertTree1(TreeNode *root) {
   if (!root)
     return nullptr;
   swap(root->left, root->right);
-  invertTree(root->left);
-  invertTree(root->right);
+  invertTree1(root->left);
+  invertTree1(root->right);
   return root;
 }
+
+TreeNode *invertTree2(TreeNode *root) {
+  if (!root)
+    return nullptr;
+  queue<TreeNode *> queue;
+  queue.push(root);
+  while (!queue.empty()) {
+    TreeNode *node = queue.front();
+    queue.pop();
+    swap(node->left, node->right);
+    if (node->left)
+      queue.push(node->left);
+    if (node->right)
+      queue.push(node->right);
+  }
+  return root;
+}
+
+TreeNode *invertTree3(TreeNode *root) {
+  if (!root)
+    return nullptr;
+  stack<TreeNode *> stack;
+  stack.push(root);
+  while (!stack.empty()) {
+    TreeNode *node = stack.top();
+    stack.pop();
+    swap(node->left, node->right);
+    if (node->left)
+      stack.push(node->left);
+    if (node->right)
+      stack.push(node->right);
+  }
+  return root;
+}
+
+// Which implementation the tests run.
+constexpr int IMPL = 1;
+constexpr auto invertTree 
+= selectImpl<IMPL>(invertTree1, invertTree2, invertTree3);
 
 TEST(InvertBinaryTree, MirrorsPerfectTree) {
   TreeNode *root = buildTreeFromLevelOrder({4, 2, 7, 1, 3, 6, 9});

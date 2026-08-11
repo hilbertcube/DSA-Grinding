@@ -1,6 +1,40 @@
 #include "headers.hpp"
 
-int calculate(string s) {
+vector<string> tokenize(string &s) {
+  if (s.empty())
+    return {};
+
+  string accum;
+  vector<string> output;
+
+  auto is_operator = [](char c) {
+    return c == '+' || c == '-' || c == '*' || c == '/';
+  };
+
+  for (auto &c : s) {
+    if (isdigit(c)) {
+      accum += c;
+    } else {
+      // push previously accumulated value, then clear
+      if (!accum.empty()) {
+        output.push_back(accum);
+        accum.clear();
+      }
+
+      if (is_operator(c)) {
+        output.push_back(string(1, c));
+      }
+    }
+  }
+
+  // handle final case
+  if (!accum.empty())
+    output.push_back(accum);
+
+  return output;
+}
+
+int calculate1(string s) {
   // remove all spaces
   auto end_pos = std::remove(s.begin(), s.end(), ' ');
   s.erase(end_pos, s.end());
@@ -42,40 +76,6 @@ int calculate(string s) {
   return result;
 }
 
-vector<string> tokenize(string &s) {
-  if (s.empty())
-    return {};
-
-  string accum;
-  vector<string> output;
-
-  auto is_operator = [](char c) {
-    return c == '+' || c == '-' || c == '*' || c == '/';
-  };
-
-  for (auto &c : s) {
-    if (isdigit(c)) {
-      accum += c;
-    } else {
-      // push previously accumulated value, then clear
-      if (!accum.empty()) {
-        output.push_back(accum);
-        accum.clear();
-      }
-
-      if (is_operator(c)) {
-        output.push_back(string(1, c));
-      }
-    }
-  }
-
-  // handle final case
-  if (!accum.empty())
-    output.push_back(accum);
-
-  return output;
-}
-
 // non-tokenize
 int calculate2(const string &s) {
   long result = 0;
@@ -108,3 +108,7 @@ int calculate2(const string &s) {
 
   return result + last;
 }
+
+// Which implementation the tests run.
+constexpr int IMPL = 1;
+constexpr auto calculate = selectImpl<IMPL>(calculate1, calculate2);

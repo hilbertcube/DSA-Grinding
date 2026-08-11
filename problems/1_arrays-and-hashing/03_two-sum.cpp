@@ -25,9 +25,9 @@ vector<int> twoSum2(const vector<int> &nums, int target) {
   return {};
 }
 
-vector<int> twoSum(const vector<int> &nums, int target) {
-  return twoSum1(nums, target);
-}
+// Which implementation the tests run.
+constexpr int IMPL = 1;
+constexpr auto twoSum = selectImpl<IMPL>(twoSum1, twoSum2);
 
 TEST(TwoSum, BasicCase) {
   vector<int> nums = {2, 7, 11, 15};

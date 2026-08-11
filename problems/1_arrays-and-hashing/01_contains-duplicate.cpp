@@ -1,7 +1,7 @@
 #include "headers.hpp"
 #include <gtest/gtest.h>
 
-bool hasDuplicate(vector<int> &nums) {
+bool hasDuplicate1(vector<int> &nums) {
   unordered_set<int> set;
   for (auto num : nums) {
     if (set.count(num))
@@ -16,6 +16,10 @@ bool hasDuplicate2(vector<int> &num) {
 
   return false;
 }
+
+// Which implementation the tests run.
+constexpr int IMPL = 1;
+constexpr auto hasDuplicate = selectImpl<IMPL>(hasDuplicate1, hasDuplicate2);
 
 TEST(ContainsDuplicate, HasDuplicate) {
   vector<int> nums = {1, 2, 3, 1};

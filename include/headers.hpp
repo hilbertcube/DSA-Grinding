@@ -36,6 +36,21 @@
 
 using namespace std;
 
+// ——— Solution variant selection ———
+// A problem often carries several implementations. List them and pick the one
+// the tests run, 1-indexed to match the naming:
+//
+//   constexpr int IMPL = 1;
+//   constexpr auto invertTree = selectImpl<IMPL>(invertTree1, invertTree2, invertTree3);
+//
+// Every variant is still compiled whichever one is selected, so none of them
+// rot, and an out-of-range IMPL is a compile error rather than a bad read.
+template <int N, typename... Fns>
+constexpr auto selectImpl(Fns... fns) {
+  static_assert(N >= 1 && N <= static_cast<int>(sizeof...(Fns)), "IMPL is out of range for this problem's implementation list");
+  return std::get<N - 1>(std::make_tuple(fns...));
+}
+
 // ——— Sequence containers ———
 template <typename T>
 ostream &operator<<(ostream &os, const vector<T> &v) {

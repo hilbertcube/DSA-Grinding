@@ -1,7 +1,7 @@
 #include "headers.hpp"
 #include <gtest/gtest.h>
 
-bool isAnagram(string s, string t) {
+bool isAnagram1(string s, string t) {
   if (s.size() != t.size())
     return false;
 
@@ -30,6 +30,10 @@ bool isAnagram2(string s, string t) {
   }
   return countS == countT;
 }
+
+// Which implementation the tests run.
+constexpr int IMPL = 1;
+constexpr auto isAnagram = selectImpl<IMPL>(isAnagram1, isAnagram2);
 
 TEST(ValidAnagram, IsAnagram) {
   EXPECT_TRUE(isAnagram("racecar", "carrace"));

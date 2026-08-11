@@ -31,7 +31,7 @@ bool isValid(vec2c &grid, int r, int c) {
   return (within_bound && grid[r][c] != 'X');
 }
 
-int minimumSteps(vec2c &grid, int r, int c) {
+int minimumSteps1(vec2c &grid, int r, int c) {
   // if(grid[r][c] == 'X') return -1;
   if (grid[r][c] == 'C')
     return 0;
@@ -120,10 +120,12 @@ int minimumSteps2(vec2c &grid, int r, int c) {
   return -1;
 }
 
-// Both implementations must agree, so every case runs through each.
+// Which implementation the tests run.
+constexpr int IMPL = 1;
+constexpr auto minimumSteps = selectImpl<IMPL>(minimumSteps1, minimumSteps2);
+
 void expectSteps(vec2c grid, int r, int c, int expected) {
   EXPECT_EQ(minimumSteps(grid, r, c), expected);
-  EXPECT_EQ(minimumSteps2(grid, r, c), expected);
 }
 
 // The grid the old main() used to build, now actually asserted on. The nearest

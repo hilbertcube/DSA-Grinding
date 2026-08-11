@@ -62,6 +62,25 @@ TEST(SuiteName, CaseName) {
 A file with no tests yet still compiles and runs; it reports `0 tests` and the
 runner prints a reminder.
 
+## Multiple Implementations
+
+When a problem has more than one solution, name them `solve1`, `solve2`, ... and
+let `selectImpl` (from `headers.hpp`) pick the one the tests run:
+
+```cpp
+TreeNode *invertTree1(TreeNode *root) { /* recursive */ }
+TreeNode *invertTree2(TreeNode *root) { /* BFS */ }
+TreeNode *invertTree3(TreeNode *root) { /* iterative DFS */ }
+
+// Which implementation the tests run.
+constexpr int IMPL = 1;
+constexpr auto invertTree = selectImpl<IMPL>(invertTree1, invertTree2, invertTree3);
+```
+
+The tests keep calling `invertTree`, so switching is a one-digit edit. `IMPL` is
+1-indexed to match the names, every variant is compiled whichever one is
+selected so none of them rot, and an out-of-range `IMPL` is a compile error.
+
 ## Tree Problems
 
 Files in `problems/7_trees/` include `tree_helpers.hpp` instead of `headers.hpp`,
