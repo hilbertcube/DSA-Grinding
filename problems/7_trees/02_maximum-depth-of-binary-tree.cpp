@@ -21,6 +21,7 @@ int maxDepth1(TreeNode *root) {
   return 0;
 }
 
+// DFS
 int maxDepth2(TreeNode *root) {
   if (!root)
     return 0;
