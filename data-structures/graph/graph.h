@@ -1,6 +1,6 @@
 #pragma once
 
-#include "headers.hpp"
+#include "headers.h"
 #include "union_find.h"
 
 // Forward declarations for friend functions

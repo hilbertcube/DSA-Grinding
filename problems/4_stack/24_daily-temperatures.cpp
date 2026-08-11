@@ -1,4 +1,4 @@
-#include "headers.hpp"
+#include "headers.h"
 
 vector<int> dailyTemperaturesBrute(vector<int> &temps) {
   int n = temps.size();

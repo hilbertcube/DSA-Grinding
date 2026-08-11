@@ -1,4 +1,4 @@
-#include "headers.hpp"
+#include "headers.h"
 
 int maxProfit(vector<int> &prices) {
   int L = 0, R = 1;

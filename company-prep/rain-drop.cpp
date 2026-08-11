@@ -1,4 +1,4 @@
-#include "headers.hpp"
+#include "headers.h"
 
 constexpr int ROAD_SIZE = 25;
 constexpr int RAIN_SIZE = 5;

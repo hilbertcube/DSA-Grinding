@@ -1,7 +1,7 @@
 #ifndef TREE_HELPERS
 #define TREE_HELPERS
 
-#include "headers.hpp"
+#include "headers.h"
 
 struct TreeNode {
   int val;

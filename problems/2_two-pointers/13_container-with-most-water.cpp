@@ -1,4 +1,4 @@
-#include "headers.hpp"
+#include "headers.h"
 
 int maxAreaBruteForce(vector<int> &heights) {
   int max_water = 0;

@@ -1,4 +1,4 @@
-#include "tree_helpers.hpp"
+#include "tree_helpers.h"
 #include <gtest/gtest.h>
 
 /*

@@ -1,4 +1,4 @@
-#include "headers.hpp"
+#include "headers.h"
 
 int sum_digits_square(int n) {
   int sum = 0;

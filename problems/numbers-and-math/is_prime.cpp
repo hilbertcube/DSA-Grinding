@@ -1,4 +1,4 @@
-#include "headers.hpp"
+#include "headers.h"
 
 vector<int> sieveOfEratosthenes(int n) {
   vector<bool> prime(n + 1, true);

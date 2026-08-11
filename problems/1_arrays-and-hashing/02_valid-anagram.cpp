@@ -1,4 +1,4 @@
-#include "headers.hpp"
+#include "headers.h"
 #include <gtest/gtest.h>
 
 bool isAnagram1(string s, string t) {

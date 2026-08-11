@@ -1,4 +1,4 @@
-#include "headers.hpp"
+#include "headers.h"
 
 bool is_opening(char c) {
   return (c == '(' || c == '[' && c == '{');

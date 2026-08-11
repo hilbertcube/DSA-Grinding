@@ -7,8 +7,8 @@ C++ practice repo for data structures, algorithms, and interview-style problems.
 - `problems/`: categorized LeetCode-style solutions
 - `company-prep/`: one-off interview prep problems
 - `data-structures/`: custom implementations and tests
-- `include/headers.hpp`: shared STL includes used by problem files
-- `include/tree_helpers.hpp`: `TreeNode` plus tree build/compare helpers for `problems/7_trees/`
+- `include/headers.h`: shared STL includes used by problem files
+- `include/tree_helpers.h`: `TreeNode` plus tree build/compare helpers for `problems/7_trees/`
 - `third_party/googletest/`: vendored GoogleTest
 - `problems/x.sh`: compile-and-run helper for single problem files
 
@@ -47,7 +47,7 @@ GoogleTest's `gtest_main` supplies `main()`, so no problem file defines one. A
 file is just the solution followed by its tests:
 
 ```cpp
-#include "headers.hpp"
+#include "headers.h"
 #include <gtest/gtest.h>
 
 bool hasDuplicate(vector<int> &nums) {
@@ -65,7 +65,7 @@ runner prints a reminder.
 ## Multiple Implementations
 
 When a problem has more than one solution, name them `solve1`, `solve2`, ... and
-let `selectImpl` (from `headers.hpp`) pick the one the tests run:
+let `selectImpl` (from `headers.h`) pick the one the tests run:
 
 ```cpp
 TreeNode *invertTree1(TreeNode *root) { /* recursive */ }
@@ -73,8 +73,7 @@ TreeNode *invertTree2(TreeNode *root) { /* BFS */ }
 TreeNode *invertTree3(TreeNode *root) { /* iterative DFS */ }
 
 // Which implementation the tests run.
-constexpr int IMPL = 1;
-constexpr auto invertTree = selectImpl<IMPL>(invertTree1, invertTree2, invertTree3);
+SELECT_IMPL(2, invertTree, invertTree1, invertTree2, invertTree3);
 ```
 
 The tests keep calling `invertTree`, so switching is a one-digit edit. `IMPL` is
@@ -83,8 +82,8 @@ selected so none of them rot, and an out-of-range `IMPL` is a compile error.
 
 ## Tree Problems
 
-Files in `problems/7_trees/` include `tree_helpers.hpp` instead of `headers.hpp`,
-which pulls in `headers.hpp` along with `TreeNode` and these helpers:
+Files in `problems/7_trees/` include `tree_helpers.h` instead of `headers.h`,
+which pulls in `headers.h` along with `TreeNode` and these helpers:
 
 - `buildTreeFromLevelOrder({3, 9, 20, null, null, 15, 7})`: builds a tree from a
   LeetCode-style level-order list, where `null` marks a missing child
@@ -97,7 +96,12 @@ which pulls in `headers.hpp` along with `TreeNode` and these helpers:
 ## Formatting
 
 ```bash
+# Format problems/
 find ./problems -name "*.cpp" -o -name "*.hpp" -o -name "*.h" | xargs clang-format -i --style=file:./.clang-format
+
+# Format includes/
 find ./include -name "*.cpp" -o -name "*.hpp" -o -name "*.h" | xargs clang-format -i --style=file:./.clang-format
+
+# Format data-structures/
 find ./data-structures -name "*.cpp" -o -name "*.hpp" -o -name "*.h" | xargs clang-format -i --style=file:./.clang-format
 ```

@@ -1,4 +1,4 @@
-#include "tree_helpers.hpp"
+#include "tree_helpers.h"
 #include <gtest/gtest.h>
 
 /*
@@ -16,15 +16,16 @@ Output: 0
 */
 
 int maxDepth1(TreeNode *root) {
-  if(!root) return 0;
+  if (!root)
+    return 0;
   return 0;
 }
 
 int maxDepth2(TreeNode *root) {
-  if(!root) return 0;
+  if (!root)
+    return 0;
   return 0;
 }
-
 
 // Which implementation the tests run.
 SELECT_IMPL(1, maxDepth, maxDepth1, maxDepth2);

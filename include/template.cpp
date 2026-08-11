@@ -9,10 +9,10 @@
 //   - Several solutions to one problem: name them solve1, solve2, ... and let
 //     SELECT_IMPL pick the live one. With only one solution, name it plainly
 //     and delete the SELECT_IMPL block entirely.
-//   - Tree problems include "tree_helpers.hpp" instead of "headers.hpp"; it
-//     pulls in headers.hpp plus TreeNode and buildTreeFromLevelOrder().
+//   - Tree problems include "tree_helpers.h" instead of "headers.h"; it
+//     pulls in headers.h plus TreeNode and buildTreeFromLevelOrder().
 
-#include "headers.hpp"
+#include "headers.h"
 #include <gtest/gtest.h>
 
 /*
