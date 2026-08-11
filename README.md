@@ -65,7 +65,7 @@ runner prints a reminder.
 ## Multiple Implementations
 
 When a problem has more than one solution, name them `solve1`, `solve2`, ... and
-let `selectImpl` (from `headers.h`) pick the one the tests run:
+let `SELECT_IMPL` (from `headers.h`) pick the one the tests run:
 
 ```cpp
 TreeNode *invertTree1(TreeNode *root) { /* recursive */ }
