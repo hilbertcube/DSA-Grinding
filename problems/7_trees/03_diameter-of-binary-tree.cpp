@@ -18,8 +18,27 @@ Input: root = [1,2]
 Output: 1
 */
 
-int diameterOfBinaryTree(TreeNode *root) {
+// preorder dfs
+int dfs(TreeNode* root, int& height) {
+  if(!root) return 0;
+
+  int left_height = dfs(root->left, height);
+  int right_height = dfs(root->right, height);
+  height = max(height, left_height + right_height);
+  return 1 + max(left_height, right_height);
 }
+
+// DFS
+int diameterOfBinaryTree1(TreeNode *root) {
+  int height = 0;
+  dfs(root, height);
+  return height;
+}
+
+
+
+// Which implementation the tests run.
+SELECT_IMPL(1, diameterOfBinaryTree, diameterOfBinaryTree1);
 
 TEST(DiameterOfBinaryTree, PathThroughRoot) {
   TreeNode *root = buildTreeFromLevelOrder({1, 2, 3, 4, 5});

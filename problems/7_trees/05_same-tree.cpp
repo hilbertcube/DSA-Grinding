@@ -21,7 +21,10 @@ Input: p = [1,2,1], q = [1,1,2]
 Output: false
 */
 
+// idea: compare node by node, using traversal
 bool isSameTree(TreeNode *p, TreeNode *q) {
+
+
 }
 
 TEST(SameTree, IdenticalTrees) {

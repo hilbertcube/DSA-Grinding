@@ -34,7 +34,7 @@ TreeNode *invertTree2(TreeNode *root) {
   while (!queue.empty()) {
     TreeNode *node = queue.front();
     queue.pop();
-    swap(node->left, node->right);
+    swap(node->left, node->right);  // process node
     if (node->left)
       queue.push(node->left);
     if (node->right)
@@ -52,7 +52,7 @@ TreeNode *invertTree3(TreeNode *root) {
   while (!stack.empty()) {
     TreeNode *node = stack.top();
     stack.pop();
-    swap(node->left, node->right);
+    swap(node->left, node->right);  // process node
     if (node->left)
       stack.push(node->left);
     if (node->right)

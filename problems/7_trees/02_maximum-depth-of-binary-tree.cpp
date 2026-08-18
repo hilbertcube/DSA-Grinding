@@ -15,17 +15,24 @@ Input: root = []
 Output: 0
 */
 
+// Recursion
 int maxDepth1(TreeNode *root) {
-  if (!root)
-    return 0;
-  return 0;
+  if (!root) return 0;
+
+  // 1+ is to account for the root node
+  return 1 + max(maxDepth1(root->left), maxDepth1(root->right));
 }
 
 // DFS
 int maxDepth2(TreeNode *root) {
-  if (!root)
-    return 0;
-  return 0;
+  queue<TreeNode *> q;
+  if (!root) q.push(root);
+  int depth = 0;
+  while(!q.empty()) {
+
+  }
+
+  return depth;
 }
 
 // Which implementation the tests run.
